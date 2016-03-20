@@ -8,8 +8,8 @@ Writing project purpose and starting on enterprise considerations.
 
 ## Reading and initial source
 2016-03-20, 15.45-16.45  
-Starting from [Building REST APIs With Spring Boot] http://ryanjbaxter.com/2014/12/17/building-rest-apis-with-spring-boot/
-Using [Spring initializr] http://start.spring.io/
+Starting from [Building REST APIs With Spring Boot](http://ryanjbaxter.com/2014/12/17/building-rest-apis-with-spring-boot/)
+Using [Spring initializr](http://start.spring.io/)
 Thinking about clustering/load balancing. Hitting http://stackoverflow.com/questions/2205157/how-to-cluster-and-load-balance-a-spring-osgi-app
 And then http://servicemix.apache.org/ - reading excitedly - wants to create a project with that - partly because I know that Talend runtime is/was more or less build with these products. I want the ESB and Camel as well. Also why not use something compliant with JPA, JAX-WS, etc.!?
 
