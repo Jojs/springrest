@@ -8,22 +8,22 @@ Why choose Spring and rest? What do you do when entering unknown territory? - I 
 I use Spring for production and enterprise today. However, I have a little larger requirements to the final solution than this initial experiment will deliver, and that means building on top of this with other frameworks.
 
 ##Basic Requirements
-Create a tiny REST / JSON web service with an API that supports the following:
-Create new company
-Get a list of all companies
-Get details about a company
-Able to update a company
-Able to add beneficial owner(s) of the company
+Create a tiny REST / JSON web service with an API that supports the following:  
+Create new company  
+Get a list of all companies  
+Get details about a company  
+Able to update a company  
+Able to add beneficial owner(s) of the company  
 
-A company has the following attributes:
-Company ID
-Name
-Address
-City
-Country
-E-mail (not required)
-Phone Number (not required)
-One or more directors and beneficial owners.
+A company has the following attributes:  
+Company ID  
+Name  
+Address  
+City  
+Country  
+E-mail (not required)  
+Phone Number (not required)  
+One or more directors and beneficial owners.  
 
 ##Create JavaScript client
 Create a tiny client using a well-known Javascript framework e.g. Ember, Angularjs or like.
@@ -41,7 +41,7 @@ How can you make the service redundant? What considerations should you do?
 ###Autentication and Authorization
 ####Paswords and user data
 Passwords must be encrypted and have separate salts. Best of all is to use a slow hash function
-There is a really good description here: https://crackstation.net/hashing-security.htm
+There is a really good description here: https://crackstation.net/hashing-security.htm  
 Another good strategy is to keep user data on another server than the main data. One standard solution is to use a LDAP hosted separately. Most often these provide salted and encrypted passwords and can integrate with multiple other authorisation services.
 
 
