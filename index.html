@@ -28,8 +28,8 @@
 <a id="project-purpose" class="anchor" href="#project-purpose" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Project Purpose</h2>
 
 <p>2016-03-20, 11.30<br>
-Almost every project I ever worked on were already years old, save for a few handfull of mobile apps. Here I will explore how to start from scratch. In coming projecs I will see how to harness the solution to enterprise scale.
-Why choose Spring and rest? What do you do when entering unknown teritory? - I call a friend :-) And he said "Springboot and rest", and sure enough there are lots of examples to find online. 
+Almost every project I ever worked on were already years old, save for a few handful of mobile apps. Here I will explore how to start from scratch. In coming projects I will see how to harness the solution to enterprise scale.
+Why choose Spring and rest? What do you do when entering unknown territory? - I call a friend :-) And he said "Springboot and rest", and sure enough there are lots of examples to find online. 
 I use Spring for production and enterprise today. However, I have a little larger requirements to the final solution than this initial experiment will deliver, and that means building on top of this with other frameworks.</p>
 
 <h2>
@@ -63,7 +63,7 @@ One or more directors and beneficial owners.</p>
 <p>Implement versioning of all the data contained in the database.</p>
 
 <h2>
-<a id="autentication-and-autorization" class="anchor" href="#autentication-and-autorization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Autentication and Autorization</h2>
+<a id="autentication-and-authorization" class="anchor" href="#autentication-and-authorization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Autentication and Authorization</h2>
 
 <p>TODO - propose a protocol / method and justify your choice</p>
 
@@ -71,6 +71,24 @@ One or more directors and beneficial owners.</p>
 <a id="redundancy" class="anchor" href="#redundancy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Redundancy</h2>
 
 <p>How can you make the service redundant? What considerations should you do?</p>
+
+<h2>
+<a id="enterprise-considerations" class="anchor" href="#enterprise-considerations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Enterprise considerations</h2>
+
+<h3>
+<a id="autentication-and-authorization-1" class="anchor" href="#autentication-and-authorization-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Autentication and Authorization</h3>
+
+<h4>
+<a id="paswords-and-user-data" class="anchor" href="#paswords-and-user-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Paswords and user data</h4>
+
+<p>Passwords must be encrypted and have separate salts. Best of all is to use a slow hash function
+There is a really good description here: <a href="https://crackstation.net/hashing-security.htm">https://crackstation.net/hashing-security.htm</a>
+Another good strategy is to keep user data on another server than the main data. One standard solution is to use a LDAP hosted separately. Most often these provide salted and encrypted passwords and can integrate with multiple other authorisation services.</p>
+
+<h2>
+<a id="source-project" class="anchor" href="#source-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Source project</h2>
+
+<p><a href="http://ryanjbaxter.com/2014/12/17/building-rest-apis-with-spring-boot/">http://ryanjbaxter.com/2014/12/17/building-rest-apis-with-spring-boot/</a></p>
 
 <h2>
 <a id="misc" class="anchor" href="#misc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Misc</h2>
