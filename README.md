@@ -1,4 +1,4 @@
-# springrest
+# Basic Spring REST web service
 Exploring basic rest service with Spring
 
 ##Project Purpose
