@@ -45,9 +45,9 @@ Having trouble with installing app on heroku.
 Was missing Procfile with content web:    java -Dserver.port=$PORT -jar  target/springrest-0.0.1-SNAPSHOT.jar
 
 ## Heroku
-2016-03-21, 15.15-
+2016-03-21, 15.15-16.00
 Nope, really the problem was a folder debt. The pom.xml must be in the root
-Deploy and test
+Seems that Heroku has problems ... taking a break
 
 Wiki on project
 Android
