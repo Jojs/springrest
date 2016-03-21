@@ -34,7 +34,7 @@ Adding collection to Postman
 Learning how to handle collections on REST  
 
 ## Heroku
-2016-03-21, 11.00-
+2016-03-21, 11.00-13.00
 Account on Heroku, installing toolbelt
 11.15 - 
 Considering in-memory MongoDB
@@ -43,6 +43,10 @@ Deciding on a mLab free acoount. Retrofitting app to use this account.
 Running app with new db. Checking my Postman collection.
 Having trouble with installing app on heroku.
 Was missing Procfile with content web:    java -Dserver.port=$PORT -jar  target/springrest-0.0.1-SNAPSHOT.jar
+
+## Heroku
+2016-03-21, 15.15-
+Nope, really the problem was a folder debt. The pom.xml must be in the root
 Deploy and test
 
 Wiki on project

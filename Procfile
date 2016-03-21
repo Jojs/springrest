@@ -1,1 +1,1 @@
-web:    java -jar  target/springrest-0.0.1-SNAPSHOT.jar
+java -Dserver.port=$PORT -jar  target/springrest-0.0.1-SNAPSHOT.jar
