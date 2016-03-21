@@ -30,4 +30,22 @@ Installing homebrew and MongoDB
 Running MonogDB  
 Testing, playing around with Postman  
 Adding DB-references between models.  
-Adding collection to Postman
+Adding collection to Postman  
+Learning how to handle collections on REST  
+
+## Heroku
+2016-03-21, 11.00-
+Account on Heroku
+11.15 - 
+Considering in-memory MongoDB
+Nice write-up here, good for testing (http://dontpanic.42.nl/2015/02/in-memory-mongodb-for-unit-and.html)
+Deciding on a mLab free acoount. Retrofitting app to use this account.
+Running app with new db. Checking my Postman collection.
+
+Deploy and test
+Wiki on project
+Android
+Security
+Load balancing
+Diffs/history
+
