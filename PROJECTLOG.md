@@ -49,9 +49,21 @@ Was missing Procfile with content web:    java -Dserver.port=$PORT -jar  target/
 Nope, really the problem was a folder debt. The pom.xml must be in the root
 Seems that Heroku has problems ... taking a break
 
+## Heroku
+2016-03-21, 17.00-18.15
+Still fighting Heroku. There is a timeout on some port ... talking with support
+
+
+## Moving on with Android
+2016-03-21, 18.15-19.00
+
+
 Wiki on project
 Android
 Security
 Load balancing
 Diffs/history
+
+https://github.com/spring-projects/spring-boot/issues/1718
+http://docs.spring.io/spring-data/rest/docs/current/reference/html/#projections-excerpts
 
