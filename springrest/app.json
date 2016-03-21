@@ -1,0 +1,6 @@
+{
+  "name": "Spring rest",
+  "description": "Spring rest deployed to Heroku.",
+  "image": "heroku/java",
+  "addons": [  ]
+}

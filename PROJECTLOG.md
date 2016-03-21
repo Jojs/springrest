@@ -35,14 +35,16 @@ Learning how to handle collections on REST
 
 ## Heroku
 2016-03-21, 11.00-
-Account on Heroku
+Account on Heroku, installing toolbelt
 11.15 - 
 Considering in-memory MongoDB
 Nice write-up here, good for testing (http://dontpanic.42.nl/2015/02/in-memory-mongodb-for-unit-and.html)
 Deciding on a mLab free acoount. Retrofitting app to use this account.
 Running app with new db. Checking my Postman collection.
-
+Having trouble with installing app on heroku.
+Was missing Procfile with content web:    java -Dserver.port=$PORT -jar  target/springrest-0.0.1-SNAPSHOT.jar
 Deploy and test
+
 Wiki on project
 Android
 Security
