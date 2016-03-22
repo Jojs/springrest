@@ -56,6 +56,33 @@ Still fighting Heroku. There is a timeout on some port ... talking with support
 
 ## Moving on with Android
 2016-03-21, 18.15-19.00
+It was hard to find the answer of where to put files. Went through this: https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application
+to realise that it was easy. I was just on the brink of creating a new app for this alone, but  - put files under ressoures/static or ressources/public, etc. 
+
+## Found solution on Heroku
+2016-03-21, 20.00-20.45
+http://nicholaspaulsmith.com/spring-boot-on-heroku/
+Procfile must contain  
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*.jar  
+
+## Android
+2016-03-21, 21.30-23.30
+Working on Android. Learning about production ready packaging of sources using wro:
+https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application
+Reading up on HATEAOS, HAL, ALPS
+Considering:
+
+
+## Android
+2016-03-21, 21.30-23.30
+Reading up on HATEAOS, HAL, ALPS
+Considering:
+https://github.com/jcassee/angular-hypermedia
+https://github.com/LuvDaSun/angular-hal
+https://github.com/guylabs/angular-spring-data-rest
+To read another day: http://radar.oreilly.com/2013/05/a-matter-of-semantics.html
+Find webjars here:
+http://www.webjars.org/
 
 
 Wiki on project

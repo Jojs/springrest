@@ -1,0 +1,49 @@
+<div class="container" ng-controller="JojsCompaniesController">
+    <div class="page-header">
+        <h1>Companies</h1>
+    </div>
+
+    <p class="lead">
+        List of companies with links to addresses, directors and owners
+    </p>
+
+    <div ng-cloak >
+        <!--
+        <ul class="nav nav-tabs">
+            <li role="presentation"  ng-class="active" ng-repeat="company in companies._embedded.companies"><a href="{{company._links.self.href}}">{{company.name}}</a></li>
+        </ul>
+        -->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Company name</th>
+                <th>Address</th>
+                <th>Directors</th>
+                <th>Owners</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="company in companies">
+                <td><a href="#/companies{{company.id}}">{{company.name}}</a></td>
+                <td><a href="#/address{{company.address.id}}">{{company.address.city}}</a></td>
+                <td><p ng-repeat="director in company.directors"><a href="#/people{{director.id}}">{{director.firstName}}</a></p></td>
+                <td><p ng-repeat="owner in company.owners"><a href="#/people{{director.id}}">{{owner.firstName}}</a></p></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <button class="btn btn-primary" ng-click="isCodeCollapsed = !isCodeCollapsed">Show me the code</button>
+    <button class="btn btn-primary" ng-click="isResponseCollapsed = !isResponseCollapsed">Show me the response</button>
+    <hr>
+    <div hljs collapse="!isCodeCollapsed">
+        SpringDataRestAdapter.process($http.get('/rest')).then(function (processedResponse) {
+        $scope.processedResponse = angular.toJson(processedResponse, true);
+        $scope.availableResources = processedResponse._resources();
+        });</div>
+    <div hljs source="response" collapse="!isResponseCollapsed"></div>
+    <footer>
+        <p><a href="https://github.com/Jojs/springrest/blob/master/LICENSE" target="_blank">&copy; Jan Sindberg 2016</a></p>
+    </footer>
+</div>
