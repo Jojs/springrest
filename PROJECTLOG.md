@@ -65,15 +65,15 @@ http://nicholaspaulsmith.com/spring-boot-on-heroku/
 Procfile must contain  
 web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*.jar  
 
-## Android
+## AngularJS
 2016-03-21, 21.30-23.30
-Working on Android. Learning about production ready packaging of sources using wro:
+Working on AngularJS. Learning about production ready packaging of sources using wro:
 https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application
 Reading up on HATEAOS, HAL, ALPS
 Considering:
 
 
-## Android
+## AngularJS
 2016-03-21, 21.30-23.30
 Reading up on HATEAOS, HAL, ALPS
 Considering:
@@ -86,11 +86,39 @@ http://www.webjars.org/
 
 
 Wiki on project
-Android
+AngularJS
 Security
 Load balancing
 Diffs/history
 
 https://github.com/spring-projects/spring-boot/issues/1718
 http://docs.spring.io/spring-data/rest/docs/current/reference/html/#projections-excerpts
+
+2017-04-17 14.00-14.30  
+Signup from frontend  
+
+2017-04-17 19.15-21.15  
+Signup from frontend. Realising that there is a lot to learn about spring rest. http://spring.io/guides/tutorials/bookmarks/  
+
+2017-04-18 20.00-00.00  
+Stuck in AngularJS Routing and response from rest.  
+
+2017-04-19 19.15-23.15  
+Catching up on Angular factories, modules, routers  
+
+2017-04-19 19.15-23.15  
+Catching up on Angular factories, modules, routers  
+
+2017-04-21 20.00-01.15  
+Creating signup.
+Fighting inheritance in JavaScript
+
+2017-04-22 14.45-15.30  
+Cleaning up JS with inheritance
+
+2017-04-22 19.00-22.00  
+Learning more bootstrap  
+Including newer libraries of bootstrap and ignoring wro since it looks like webjars are not updated.
+Navigation dropdown, buttons for login, signup, logout.
+Cleaning up JS
 

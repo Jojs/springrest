@@ -25,7 +25,7 @@
             <tbody>
             <tr ng-repeat="company in companies">
                 <td><a href="#/companies{{company.id}}">{{company.name}}</a></td>
-                <td><a href="#/address{{company.address.id}}">{{company.address.city}}</a></td>
+                <td><a href="#/addresses{{company.address.id}}">{{company.address.city}}</a></td>
                 <td><p ng-repeat="director in company.directors"><a href="#/people{{director.id}}">{{director.firstName}}</a></p></td>
                 <td><p ng-repeat="owner in company.owners"><a href="#/people{{director.id}}">{{owner.firstName}}</a></p></td>
             </tr>

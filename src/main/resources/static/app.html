@@ -8,9 +8,11 @@
 
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link href="css/angular-bootstrap.css" rel="stylesheet">
+    <link href="js/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 
     <script src="/js/angular-bootstrap.js" type="text/javascript"></script>
     <script src="/js/angular-resource.js" type="text/javascript"></script>
+    <script src="/js/bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript"></script>
     <script src="/js/app.js"></script>
     <style type="text/css">
 [ng\:cloak], [ng-cloak], .ng-cloak {
@@ -20,7 +22,7 @@
 </head>
 
 <body ng-app="jojs">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="NavigationController">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="jojsNavigationController">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -40,9 +42,8 @@
                 </li>
                 <li><a href="https://github.com/Jojs/springrest/blob/master/RELEASENOTES.md"
                        target="_blank">Release notes</a></li>
-                <!--
                 <li>
-                    <div class="btn-group navbar-btn">
+                    <div class="btn-group navbar-btn" ng-show="authenticated">
                         <button type="button" class="btn btn-primary" ng-click="navigateTo('#/companies')">Companies</button>
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
@@ -50,18 +51,96 @@
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#/companies">Companies</a></li>
-                            <li><a href="#/addresses">Addresses</li>
+                            <li><a href="#/addresses">Addresses</a></li>
                             <li><a href="#/people">People</a></li>
                         </ul>
                     </div>
+                    <button type="button" class="btn btn-primary navbar-btn" ng-click="navigateTo('#/logout')" ng-show="authenticated">Log Out</button>
+                    <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal" ng-hide="authenticated">Log In</button>
+                    <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signupModal" ng-hide="authenticated">Sign Up</button>
                 </li>
-                -->
             </ul>
         </div>
     </div>
 </nav>
 <div><br></div>
 <div ng-view></div>
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" role="dialog" ng-controller="JojsLoginController as loginController">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+                <div class="alert alert-danger" ng-show="loginController.error">
+                    There was a problem logging up. Please try again.
+                </div>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+                <form role="form" ng-submit="loginController.login()">
+                    <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" checked>Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                <p>Not a member? <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">Sign Up</a></p>
+                <p>Forgot <a href="#">Password?</a></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="signupModal" role="dialog" ng-controller="JojsSignupController as signupController">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4><span class="glyphicon glyphicon-user"></span> Signup</h4>
+                <div class="alert alert-danger" ng-show="signupController.error">
+                    There was a problem signing up. Please try again.
+                </div>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+                <form role="form" ng-submit="signupController.signup()">
+                    <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" checked>Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Signup</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>

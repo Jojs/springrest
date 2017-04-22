@@ -1,158 +1,147 @@
+// Source: http://phrogz.net/js/classes/OOPinJS2.html
+Function.prototype.inheritsFrom = function( parentClassOrObject ){
+	if ( parentClassOrObject.constructor == Function )
+	{
+		//Normal Inheritance
+		this.prototype = new parentClassOrObject;
+		this.prototype.constructor = this;
+		this.prototype.parent = parentClassOrObject.prototype;
+	}
+	else
+	{
+		//Pure Virtual Inheritance
+		this.prototype = parentClassOrObject;
+		this.prototype.constructor = this;
+		this.prototype.parent = parentClassOrObject;
+	}
+	return this;
+};
+
 (function(angular) {
   'use strict';
 angular.module('jojs.service', []);
 
-angular.module('jojs.Address', [])
-    .factory('Address', ['$http', function($http) {
-    function Address(addressData) {
-        if (addressData) {
-            this.setData(addressData);
-        }
-        // Some other initializations related to book
+angular.module('jojs.DomainObject', [])
+    .factory('DomainObject', ['$http', function($http) {
+    function DomainObject() {
     };
-    Address.prototype = {
-        setData: function(addressData) {
-            this.address = addressData.address;
-            this.city = addressData.city;
-            this.country = addressData.country;
-            this.email = addressData.email;
-            this.phoneNumber = addressData.phoneNumber;
-            this.href = addressData._links.self.href;
-            this.id = this.href.substr(this.href.lastIndexOf('/', this.href.length));
+    DomainObject.prototype = {
+        init : function(newBaseUrl, data) {
+            this.baseUrl = newBaseUrl;
+            if (data) {
+                this.setData(data);
+            }
+        },
+        setData: function(data) {
+            this.links = data._links;
+            this.id = this.links.self.href.substr(this.links.self.href.lastIndexOf('/', this.links.self.href.length));
+            this.setDomainData(data);
+        },
+        setDomainData: function(data) {
         },
         load: function(id) {
-            var scope = this;
-            $http.get('ourserver/books/' + bookId).success(function(addressData) {
-                scope.setData(addressData);
+            var self = this;
+            $http.get(this.baseUrl + id).success(function(data) {
+                self.setData(data);
             });
         },
         delete: function() {
-            $http.delete('ourserver/books/' + bookId);
+            $http.delete(this.baseUrl + this.id);
         },
         update: function() {
-            $http.put('ourserver/books/' + bookId, this);
+            $http.put(this.baseUrl + this.id, this);
         },
         getImageUrl: function(width, height) {
-            return 'our/image/service/' + this.book.id + '/' + width + '/' + height;
-        },
-        isAvailable: function() {
-            if (!this.book.stores || this.book.stores.length === 0) {
-                return false;
-            }
-            return this.book.stores.some(function(store) {
-                return store.quantity > 0;
-            });
+            return this.baseUrl + this.id + '/img/' + width + '/' + height;
         }
+    };
+    return DomainObject;
+    }]);
+
+angular.module('jojs.Address', ['jojs.DomainObject'])
+    .factory('Address', ['$http', 'DomainObject', function($http, DomainObject) {
+    function Address(addressData) {
+        this.init(addressData);
+    };
+    Address.inheritsFrom(DomainObject);
+    Address.prototype.init = function(addressData) {
+        this.parent.init.call(this, 'addresses/', addressData);
+    };
+
+    Address.prototype.setDomainData = function(addressData) {
+        this.address = addressData.address;
+        this.city = addressData.city;
+        this.country = addressData.country;
+        this.email = addressData.email;
+        this.phoneNumber = addressData.phoneNumber;
     };
     return Address;
-}]);
+    }]);
 
-angular.module('jojs.Person', ['jojs.Address'])
-    .factory('Person', ['$http', 'Address', function($http) {
-    function Person(personData, Address) {
-        if (personData) {
-            this.setData(personData);
-        }
-        // Some other initializations related to book
+angular.module('jojs.Person', ['jojs.DomainObject', 'jojs.Address'])
+    .factory('Person', ['$http', 'Address', 'DomainObject', function($http, Address, DomainObject) {
+    function Person(personData) {
+        this.init(personData);
     };
-    Person.prototype = {
-        setData: function(personData, Address) {
-            this.firstName = personData.firstName;
-            this.lastName = personData.lastName;
-            this.address = this.loadAddress(personData, Address);
-            this.href = personData._links.self.href;
-            this.id = this.href.substr(this.href.lastIndexOf('/', this.href.length));
-        },
-        load: function(id) {
-            var scope = this;
-            $http.get('ourserver/books/' + bookId).success(function(personData) {
-                scope.setData(personData);
-            });
-        },
-        loadAddress : function(personData, Address) {
-            var address;
-            $http.get(personData._links.address.href).success(function(data) {
-                address = new Address(data);
-             });
-             return address;
-        },
-
-        delete: function() {
-            $http.delete('ourserver/books/' + bookId);
-        },
-        update: function() {
-            $http.put('ourserver/books/' + bookId, this);
-        },
-        getImageUrl: function(width, height) {
-            return 'our/image/service/' + this.book.id + '/' + width + '/' + height;
-        },
-        isAvailable: function() {
-            if (!this.book.stores || this.book.stores.length === 0) {
-                return false;
-            }
-            return this.book.stores.some(function(store) {
-                return store.quantity > 0;
-            });
-        }
+    Person.inheritsFrom(DomainObject);
+    Person.prototype.init = function(personData) {
+        this.parent.init.call(this, 'people/', personData);
+    };
+    Person.prototype.setDomainData = function(personData) {
+        this.firstName = personData.firstName;
+        this.lastName = personData.lastName;
+        this.loadAddress();
+    };
+    Person.prototype.loadAddress = function() {
+        var self = this;
+        $http.get(this.links.address.href).success(function(data) {
+            self.address = new Address(data);
+        });
     };
     return Person;
-}]);
+    }]);
 
-angular.module('jojs.Company', ['jojs.Person', 'jojs.Address'])
-    .factory('Company', ['$http', 'Person', 'Address', function($http) {
-             function Company(companyData, Person, Address) {
-                 if (companyData) {
-                     this.setData(companyData, Person, Address);
-                 }
-                 // Some other initializations related to book
-             };
-             Company.prototype = {
-                 setData: function(companyData, Person, Address) {
-                     this.name = companyData.name;
-                     this.address = this.loadAddress(companyData, Address);
-                     this.directors = this.loadDirectors(companyData, Person);
-                     this.owners = this.loadOwners(companyData, Person);
-                     this.href = companyData._links.self.href;
-                     this.id = this.href.substr(this.href.lastIndexOf('/', this.href.length));
-                 },
-                 loadDirectors : function(companyData, Person) {
-                    var directors = [];
-                    $http.get(companyData._links.directors.href).success(function(data) {
-                               angular.forEach(data._embedded.people, function(value, key) {
-                                this.push(new Person(value));
-                                }, directors);
-                              });
-                     return directors;
-                 },
-                 loadOwners : function(companyData, Person) {
-                    var owners = [];
-                    $http.get(companyData._links.owners.href).success(function(data) {
-                               angular.forEach(data._embedded.people, function(value, key) {
-                                this.push(new Person(value));
-                                }, owners);
-                              });
-                     return owners;
-                 },
-                 loadAddress : function(companyData, Address) {
-                    return $http.get(companyData._links.address.href).success(function(data) {
-                        return new Address(data);
-                     });
-                 },
-                 load: function(id) {
-                     var scope = this;
-                     $http.get(id).success(function(companyData) {
-                         scope.setData(companyData);
-                     });
-                 },
-                 delete: function() {
-                     $http.delete('ourserver/books/' + bookId);
-                 },
-                 update: function() {
-                     $http.put('ourserver/books/' + bookId, this);
-                 }
-             };
-             return Company;
-         }]);
+angular.module('jojs.Company', ['jojs.DomainObject', 'jojs.Person', 'jojs.Address'])
+    .factory('Company', ['$http', 'Person', 'Address', 'DomainObject', function($http, Person, Address, DomainObject) {
+    function Company(companyData) {
+        this.init(companyData);
+    };
+    Company.inheritsFrom(DomainObject);
+    Company.prototype.init = function(companyData) {
+        this.parent.init.call(this, 'companies/', companyData);
+    };
+    Company.prototype.setDomainData = function(companyData) {
+        this.name = companyData.name;
+        this.loadAddress();
+        this.loadDirectors();
+        this.loadOwners();
+    };
+    Company.prototype.loadAddress = function() {
+        var self = this;
+        $http.get(this.links.address.href).success(function(data) {
+            self.address = new Address(data);
+        });
+    };
+    Company.prototype.loadDirectors = function() {
+        var directors = [];
+        this.directors = directors;
+        $http.get(this.links.directors.href).success(function(data) {
+            angular.forEach(data._embedded.people, function(value, key) {
+                this.push(new Person(value, Address));
+            }, directors);
+        });
+    };
+    Company.prototype.loadOwners = function() {
+        var owners = [];
+        this.owners = owners;
+        $http.get(this.links.owners.href).success(function(data) {
+            angular.forEach(data._embedded.people, function(value, key) {
+                this.push(new Person(value, Address));
+            }, owners);
+        });
+    };
+    return Company;
+    }]);
 
 angular.module('jojs.directive', []);
 
@@ -174,15 +163,19 @@ angular.module('jojs', ['jojs.service', 'jojs.directive', 'jojs.filter', 'jojs.A
                 templateUrl: '/frontend/parts/company.html'
             }).when('/addresses', {
                 templateUrl: '/frontend/parts/addresses.html'
+            }).when('/addresses/:addressId', {
+                templateUrl: '/frontend/parts/address.html'
             }).when('/people', {
                 templateUrl: '/frontend/parts/people.html'
             }).when('/people/:personId', {
                 templateUrl: '/frontend/parts/person.html'
+            }).when('/signup/', {
+                templateUrl: '/frontend/parts/create_person.html'
             }).otherwise({
                 redirectTo: '/companies'
             });
     }])
-    .controller('NavigationController', function ($scope, $location) {
+    .controller('jojsNavigationController', function ($scope, $location) {
         $scope.navigateTo = function (path) {
             $location.path(path);
         };
@@ -190,39 +183,72 @@ angular.module('jojs', ['jojs.service', 'jojs.directive', 'jojs.filter', 'jojs.A
         $scope.isResponseCollapsed = true;
         $scope.isProcessedResponseCollapsed = true;
     })
-  .controller('JojsIndexController', function($scope, $http){
-    $http.get('/').success(function(data) {
-            $scope.index = data;
-          });
-  })
-  .controller('JojsCompaniesController', function($scope, $http, Company, Person) {
-    $http.get('/companies').success(function(data) {
+   .controller('JojsIndexController', function($scope, $http){
+       $http.get('/').success(function(data) {
+           $scope.index = data;
+       });
+   })
+   .controller('JojsCompaniesController', function($scope, $http, Company, Person, Address) {
+       $http.get('/companies').success(function(data) {
            var companies = [];
            angular.forEach(data._embedded.companies, function(value, key) {
-            this.push(new Company(value, Person));
+               this.push(new Company(value, Person, Address));
             }, companies);
             $scope.companies = companies;
-          });
-  })
-  .controller('JojsCompanyController', function($scope, $http, Company, Person, Address, $routeParams) {
-    $http.get('/companies/' + $routeParams.companyId).success(function(data) {
-            $scope.company = new Company(data, Person, Address);
-          });
-  })
-  .controller('JojsPersonController', function($scope, $http, Person, Address, $routeParams) {
-    $http.get('/people/' + $routeParams.personId).success(function(data) {
-            $scope.person = new Person(data, Address);
-          });
-  })
-  .controller('JojsAdressesController', function($scope, $http){
-    $http.get('/addresses').success(function(data) {
-            $scope.addresses = data;
-          });
-  })
-  .controller('JojsPeopleController', function($scope, $http){
-    $http.get('/people').success(function(data) {
-            $scope.people = data;
-          });
-  })
+       });
+   })
+   .controller('JojsCompanyController', function($scope, $http, Company, Person, Address, $routeParams) {
+       $http.get('/companies/' + $routeParams.companyId).success(function(data) {
+           $scope.company = new Company(data, Person, Address);
+       });
+   })
+   .controller('JojsAddressesController', function($scope, $http, Address){
+       $http.get('/addresses').success(function(data) {
+          var addresses = [];
+          angular.forEach(data._embedded.addresses, function(value, key) {
+              this.push(new Address(value, Person, Address));
+          }, addresses);
+           $scope.addresses = addresses;
+       });
+   })
+   .controller('JojsAddressController', function($scope, $http, $routeParams, Address){
+       $http.get('/addresses/' + $routeParams.addressId).success(function(data) {
+           $scope.address = new Address(data);
+       });
+   })
+   .controller('JojsPeopleController', function($scope, $http, Person, Address){
+       $http.get('/people').success(function(data) {
+           var people = [];
+           angular.forEach(data._embedded.people, function(value, key) {
+               this.push(new Person(value, Person, Address));
+           }, people);
+           $scope.people = people;
+       });
+   })
+   .controller('JojsPersonController', function($scope, $http, $routeParams, Person, Address) {
+       $scope.person = new Person(null, Address);
+       $scope.person.load($routeParams.personId);
+   })
+   .controller('JojsPersonCreateController', function($scope, $http, Person){
+       this.error = false;
+       $scope.person = new Person();
+       this.createPerson = function() {
+           $scope.person.create();
+       };
+   })
+   .controller('JojsSignupController', function($scope, $http, Person){
+       this.error = true;
+       $scope.person = new Person();
+       this.signup = function() {
+           // $scope.person.create();
+       };
+   })
+   .controller('JojsLoginController', function($scope, $http, Person){
+       this.error = true;
+       $scope.person = new Person();
+       this.login = function() {
+           // $scope.person.create();
+       };
+   })
 
 })(window.angular);
