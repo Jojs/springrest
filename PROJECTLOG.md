@@ -54,7 +54,7 @@ Seems that Heroku has problems ... taking a break
 Still fighting Heroku. There is a timeout on some port ... talking with support
 
 
-## Moving on with Android
+## Moving on with AngularJS
 2016-03-21, 18.15-19.00
 It was hard to find the answer of where to put files. Went through this: https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application
 to realise that it was easy. I was just on the brink of creating a new app for this alone, but  - put files under ressoures/static or ressources/public, etc. 
