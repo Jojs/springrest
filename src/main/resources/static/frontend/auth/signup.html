@@ -1,0 +1,29 @@
+<div class="modal-header" style="padding:35px 50px;">
+    <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.cancel()">&times;</button>
+    <h4><span class="glyphicon glyphicon-user"></span> Signup</h4>
+    <div class="alert alert-danger" ng-show="$ctrl.error">
+        There was a problem signing up. Please try again.
+    </div>
+</div>
+<div class="modal-body" style="padding:40px 50px;">
+    <form role="form" ng-submit="$ctrl.signup()">
+        <div class="form-group">
+            <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+            <input type="text" class="form-control" id="usrname" placeholder="Enter userName" ng-model="user.userName" ng-required="true">
+        </div>
+        <div class="form-group">
+            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+            <input type="text" class="form-control  ok-password" id="psw" placeholder="Enter password" ng-model="user.password" ng-required="true">
+        </div>
+        <div class="strength-meter">
+            <div class="strength-meter-fill" data-strength="{{passwordStrength}}"></div>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" value="" checked>Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Signup</button>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal" ng-click="$ctrl.cancel()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+</div>

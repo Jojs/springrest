@@ -1,0 +1,26 @@
+<div class="container" ng-controller="JojsCompaniesController">
+    <div class="page-header">
+        <h1>Companies</h1>
+    </div>
+
+    <p class="lead">
+        List of companies with links to addresses, directors and owners
+    </p>
+
+    <div ng-cloak >
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Company name</th>
+                <th>Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="company in companies">
+                <td><a href="#!/companies{{company.id}}">{{company.name}}</a></td>
+                <td><a href="#!/addresses{{company.address.id}}">{{company.address.city}}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

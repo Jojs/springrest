@@ -1,0 +1,32 @@
+<div class="container" ng-controller="JojsAddressesController">
+    <div class="page-header">
+        <h1>Addresses</h1>
+    </div>
+
+    <p class="lead">
+        List of all addresses
+    </p>
+
+    <div ng-cloak >
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Address</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="address in addresses">
+                <td>{{address.address}}</td>
+                <td>{{address.city}}</td>
+                <td>{{address.country}}</td>
+                <td>{{address.email}}</td>
+                <td>{{address.phoneNumber}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

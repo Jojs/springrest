@@ -1,0 +1,16 @@
+<div ng-hide="authenticated" ng-controller="jojsNavigationController as navCtrl" ng-cloak>
+    <div class="container">
+        <div class="page-header">
+            <h1>Welcome</h1>
+        </div>
+
+        <p class="lead">
+            This is the company index where you find information about adressses, owners and directors.
+        </p>
+
+        <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="login()" ng-hide="authenticated">Log In</button>
+            <button type="button" class="btn btn-primary " data-toggle="modal" ng-click="signup()" ng-hide="authenticated">Sign Up</button>
+        </div>
+    </div>
+</div>

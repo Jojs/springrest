@@ -1,0 +1,28 @@
+<div class="container" ng-controller="JojsPeopleController">
+    <div class="page-header">
+        <h1>People</h1>
+    </div>
+
+    <p class="lead">
+        List of people
+    </p>
+
+    <div ng-cloak >
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="person in people">
+                <td>{{person.firstName}}</td>
+                <td>{{person.lastName}}</td>
+                <td><a href="#!/addresses{{company.address.id}}">{{company.address.city}}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
