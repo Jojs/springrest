@@ -23,7 +23,7 @@ angular.module('jojs.DomainObject', [])
             }, function(error){});
         },
         delete: function() {
-            $http.delete(this.baseUrl + this.id);
+            $http.delete(this.links.self.href);
         },
         create: function(callbackSucces,callbackError) {
             $http.post(this.baseUrl, this).then(function(data)
@@ -37,10 +37,10 @@ angular.module('jojs.DomainObject', [])
             );
         },
         update: function() {
-            $http.patch(this.baseUrl + this.id, this);
+            $http.patch(this.links.self.href, this);
         },
         getImageUrl: function(width, height) {
-            return this.baseUrl + this.id + '/img/' + width + '/' + height;
+            return this.links.self.href + '/img/' + width + '/' + height;
         }
     };
     return DomainObject;

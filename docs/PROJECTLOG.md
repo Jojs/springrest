@@ -143,7 +143,7 @@ Login/logout - Spring security and AngularJS is not playing nice together
 - cannot logout of basic auth because the cookie gets recreated  
 - cannot figure out how to simulate form based login in AngularJS 
 
-2017-04-27 19.00.00-00.00  
+2017-04-29 12.30.00-23.30  
 Finally found the right way to do login and logout. Posted data must be a credentials object with 
 password and username and serialized with $httpParamSerializerJQLike. Also headers must be set for 'Content-Type': "application/x-www-form-urlencoded"  
 Implementing a very rudimentary signup. Skipping on "remember me" and nice transition to login.  

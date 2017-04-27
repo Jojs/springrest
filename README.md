@@ -1,19 +1,15 @@
-# springrest
-Exploring basic rest service with Spring
-
-## Project Purpose
-2016-03-20, 11.30  
-Almost every project I ever worked on were already years old, save for a few handful of mobile apps. Here I will explore how to start from scratch. In coming projects I will see how to harness the solution to enterprise scale.
-Why choose Spring and rest? What do you do when entering unknown territory? - I call a friend :-) And he said "Springboot and rest", and sure enough there are lots of examples to find online. 
-I use Spring for production and enterprise today. However, I have a little larger requirements to the final solution than this initial experiment will deliver, and that means building on top of this with other frameworks.
+# Company Index
+Company Index is a small application I use for learning and experimenting with techniques for web development.
+A running application can be seen here: https://springrest-jojs.herokuapp.com/app.html#!/
 
 ## Basic Requirements
+### Rest
 Create a tiny REST / JSON web service with an API that supports the following:  
 Create new company  
 Get a list of all companies  
 Get details about a company  
-Able to update a company  
-Able to add beneficial owner(s) of the company  
+Able to update a company (TODO)  
+Able to add beneficial owner(s) of the company (TODO)  
 
 A company has the following attributes:  
 Company ID  
@@ -25,56 +21,33 @@ E-mail (not required)
 Phone Number (not required)  
 One or more directors and beneficial owners.  
 
-## Create JavaScript client
-Create a tiny client using a well-known Javascript framework e.g. Ember, Angularjs or like.
-
-## Versioning of data
-Implement versioning of all the data contained in the database.
-
-## Autentication and Authorization
-TODO - propose a protocol / method and justify your choice
-
-## Redundancy
-How can you make the service redundant? What considerations should you do?
-
-## Enterprise considerations
-### Autentication and Authorization
-#### Paswords and user data
-Passwords must be encrypted and have separate salts. Best of all is to use a slow hash function
-There is a really good description here: https://crackstation.net/hashing-security.htm  
-Another good strategy is to keep user data on another server than the main data. One standard solution is to use a LDAP hosted separately. Most often these provide salted and encrypted passwords and can integrate with multiple other authorisation services.
+[More thoughts on REST services](docs/REST.md)
 
 
-## Source project
-http://ryanjbaxter.com/2014/12/17/building-rest-apis-with-spring-boot/
+### JavaScript client
+Create a tiny client using AngularJS.
+[More thoughts on AngularJS](docs/ANGULARJS.md)
 
+### Authentication and Authorization
+Use Spring Security and build from here.
+[More thoughts on Authentication and Authorization](docs/AUTH.md)
 
+## Hosting and SCM
+Upload code to github and deploy to Heroku (using Docker - TODO)
 
-## Misc
-Upload code to github and deploy to Heroku using Docker
-Create an account and upload your code on GitHub and deploy it to Heroku as well. 
-See this guide for getting started with Heroku and Docker for local development.
+## Redundancy, scalability, modularity
+How can we make the service redundant, scalable and modular?  
+An interesting modular solution is outlined as the "API gateway" : https://spring.io/guides/tutorials/spring-security-and-angular-js/
 
+## Not building from Scratch
+Even though Spring and Angular is great and enables so much functionality with very 
+little boilerplate code there are even faster ways to create applications. On this project I must have used around 70 hours for the result 
+as is 2017-04-27 (and counting). In contrast I used a few hours working on https://github.com/Jojs/apacheisisrestgui/blob/master/README.md
+and in general the frontend is still more complete than what I have achieved with 70 hours here. 
+Note that both approaches was without previous experience and as such I am comparing the learning and productivity.  
 
-Paragraphs are separated
-by a blank line.
-
-Two spaces at the end of a line leave a  
-line break.
-
-Text attributes _italic_, 
-**bold**, `monospace`.
-
-Bullet list:
-
-  * apples
-  * oranges
-  * pears
-
-Numbered list:
-
-  1. apples
-  2. oranges
-  3. pears
-
-A [link](http://example.com).
+## Personal Purpose
+2016-03-20  
+Almost every project I ever worked on were already years old, save for a few handful of mobile apps. Here I will explore how to start from scratch. In coming projects I will see how to harness the solution to enterprise scale.
+Why choose Spring and rest? What do you do when entering unknown territory? - I call a friend :-) And he said "Springboot and rest", and sure enough there are lots of examples to find online. 
+I use Spring for production and enterprise today. However, I have a little larger requirements to the final solution than this initial experiment will deliver, and that means building on top of this with other frameworks.
