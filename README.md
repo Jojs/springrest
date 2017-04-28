@@ -1,6 +1,24 @@
 # Company Index
 Company Index is a small application I use for learning and experimenting with techniques for web development.
-A running application can be seen here: https://springrest-jojs.herokuapp.com/app.html#!/
+A running application can be seen [here](https://springrest-jojs.herokuapp.com/app.html#!/)  
+Once logged in a full  HATEOAS REST api is available at the root [here](https://springrest-jojs.herokuapp.com/) 
+
+## Compile and run
+Run the server Command-line:  
+`mvn spring-boot:run`  
+
+Or run the main method in UIApplication.java  
+```
+$ mvn package
+$ java -jar target/*.jar
+```
+
+Access the server on http://localhost:8080/  
+
+## General Structure
+The structure is loosely based on DDD but might be too simple to really shine. 
+I try to write as little boilerplate code as possible. 
+A variant of inheritance is used in the JavaScript domain model.
 
 ## Basic Requirements
 ### Rest
@@ -22,7 +40,6 @@ Phone Number (not required)
 One or more directors and beneficial owners.  
 
 [More thoughts on REST services](docs/REST.md)
-
 
 ### JavaScript client
 Create a tiny client using AngularJS.
