@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return repository;
     }
 
-    public class CsrfHeaderFilter extends OncePerRequestFilter {
+    private class CsrfHeaderFilter extends OncePerRequestFilter {
         @Override
         protected void doFilterInternal(HttpServletRequest request,
                 HttpServletResponse response, FilterChain filterChain)
