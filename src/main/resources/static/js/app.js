@@ -99,6 +99,9 @@ angular.module('jojs', ['jojs.auth', 'jojs.Address', 'jojs.Person', 'jojs.Compan
           $ctrl.openModal(null, '/frontend/auth/signup.html', 'jojsSignupController')
           // $ctrl.openComponentModal('jojsSignupComponent')
       };
+      $rootScope.updatePerson = function() {
+          $ctrl.openModal(null, '/frontend/companyindex/person_update.html', 'JojsPersonUpdateController')
+      };
     })
    .controller('JojsIndexController', function($scope, $http){
        $http.get('/').then(function(success) {
@@ -133,24 +136,72 @@ angular.module('jojs', ['jojs.auth', 'jojs.Address', 'jojs.Person', 'jojs.Compan
            $scope.address = new Address(success.data);
        }, function(error){});
    })
-   .controller('JojsPeopleController', function($scope, $http, Person, Address){
+   .controller('JojsPeopleController', function($rootScope, $scope, $http, Person){
        $http.get('/people').then(function(success) {
            var people = [];
            angular.forEach(success.data._embedded.people, function(value, key) {
-               this.push(new Person(value, Person, Address));
+               this.push(new Person(value));
            }, people);
            $scope.people = people;
        }, function(error){});
+       this.newPerson = function()
+       {
+            $rootScope.updatePerson();
+       }
    })
-   .controller('JojsPersonController', function($scope, $http, $routeParams, Person, Address) {
-       $scope.person = new Person(null, Address);
+   .controller('JojsPersonController', function($location, $rootScope, $scope, $http, $routeParams, Person) {
+       $scope.person = new Person(null);
        $scope.person.load($routeParams.personId);
+       this.edit = function()
+       {
+            $rootScope.person = $scope.person;
+            $rootScope.updatePerson();
+       }
+       this.delete = function()
+       {
+            $scope.person.delete();
+            $location.path('/people');
+       }
    })
-   .controller('JojsPersonCreateController', function($scope, $http, Person){
+   .controller('JojsPersonUpdateController', function($rootScope, $scope, $route, $uibModalInstance, Person){
        this.error = false;
-       $scope.person = new Person();
-       this.createPerson = function() {
-           $scope.person.create();
+       var $ctrl = this;
+       $scope.person = $rootScope.person ? $rootScope.person : new Person();
+
+       $ctrl.ok = function () {
+         $uibModalInstance.close({$value: 'ok'});
+       };
+
+       $ctrl.cancel = function () {
+         $uibModalInstance.close({$value: 'cancel'});
+       };
+
+       $ctrl.close = function () {
+         $uibModalInstance.close({$value: 'cancel'});
+       };
+       this.update = function() {
+           $ctrl.error = false;
+           if ($scope.person.id)
+           {
+               $scope.person.update(function()
+               {
+                   $route.reload();
+                   $uibModalInstance.close({$value: ''});
+               }, function()
+               {
+                    $ctrl.error = true;
+               });
+           }
+           else {
+               $scope.person.create(function()
+               {
+                   $route.reload();
+                   $uibModalInstance.close({$value: ''});
+               }, function()
+               {
+                    $ctrl.error = true;
+               });
+           }
        };
    })
    .controller('jojsLoginController', function($rootScope, $scope, $location, $http, $uibModalInstance, User) {

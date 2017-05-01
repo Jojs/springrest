@@ -1,0 +1,23 @@
+<div class="modal-header" style="padding:35px 50px;">
+    <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.cancel()">&times;</button>
+    <h4><span class="glyphicon glyphicon-user"></span> Person</h4>
+    <div class="alert alert-danger" ng-show="$ctrl.error">
+        There was a problem signing up. Please try again.
+    </div>
+</div>
+<div class="modal-body" style="padding:40px 50px;">
+    <form role="form" ng-submit="$ctrl.update()">
+        <div class="form-group">
+            <label for="firstname"><span class="glyphicon glyphicon-user"></span> First name</label>
+            <input type="text" class="form-control" id="firstname" placeholder="First name" ng-model="person.firstName" ng-required="true">
+        </div>
+        <div class="form-group">
+            <label for="lastname"><span class="glyphicon glyphicon-user"></span> Last name</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Last name" ng-model="person.lastName" ng-required="true">
+        </div>
+        <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Ok</button>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal" ng-click="$ctrl.cancel()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+</div>

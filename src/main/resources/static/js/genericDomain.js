@@ -16,19 +16,22 @@ angular.module('jojs.DomainObject', [])
         },
         setDomainData: function(data) {
         },
-        load: function(id) {
+        load: function(id, callbackSuccess,callbackError) {
             var self = this;
             $http.get(this.baseUrl + id).then(function(success) {
-                self.setData(success.data);
-            }, function(error){});
-        },
-        delete: function() {
-            $http.delete(this.links.self.href);
-        },
-        create: function(callbackSucces,callbackError) {
-            $http.post(this.baseUrl, this).then(function(data)
+                    self.setData(success.data);
+                    callbackSuccess && callbackSuccess(data);
+                }, function(data)
                 {
-                    callbackSucces && callbackSucces(data);
+                    callbackError && callbackError(data);
+                }
+            );
+
+        },
+        delete: function(callbackSuccess,callbackError) {
+            $http.delete(this.links.self.href).then(function(data)
+                {
+                    callbackSuccess && callbackSuccess(data);
                 },
                 function(data)
                 {
@@ -36,8 +39,27 @@ angular.module('jojs.DomainObject', [])
                 }
             );
         },
-        update: function() {
-            $http.patch(this.links.self.href, this);
+        create: function(callbackSuccess,callbackError) {
+            $http.post(this.baseUrl, this).then(function(data)
+                {
+                    callbackSuccess && callbackSuccess(data);
+                },
+                function(data)
+                {
+                    callbackError && callbackError(data);
+                }
+            );
+        },
+        update: function(callbackSuccess,callbackError) {
+            $http.patch(this.links.self.href, this).then(function(data)
+                {
+                    callbackSuccess && callbackSuccess(data);
+                },
+                function(data)
+                {
+                    callbackError && callbackError(data);
+                }
+            );
         },
         getImageUrl: function(width, height) {
             return this.links.self.href + '/img/' + width + '/' + height;

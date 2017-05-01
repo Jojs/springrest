@@ -1,4 +1,4 @@
-<div class="container" ng-controller="JojsPeopleController">
+<div class="container" ng-controller="JojsPeopleController as $ctrl">
     <div class="page-header">
         <h1>People</h1>
     </div>
@@ -6,6 +6,10 @@
     <p class="lead">
         List of people
     </p>
+
+    <div class="btn-group" uib-dropdown ng-cloak>
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.newPerson()">New Person</button>
+    </div>
 
     <div ng-cloak >
         <table class="table table-striped">
@@ -18,7 +22,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="person in people">
-                <td>{{person.firstName}}</td>
+                <td><a href="#!/people{{person.id}}">{{person.firstName}}</a></td>
                 <td>{{person.lastName}}</td>
                 <td><a href="#!/addresses{{company.address.id}}">{{company.address.city}}</a></td>
             </tr>
