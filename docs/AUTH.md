@@ -27,7 +27,7 @@ Found http://www.passay.org/
 - Deciding to only using a simple example. Will have to look into more elaborate configurations as well as dictionary usage later.  
 
 ## Password Security Beyond Users choice  
-The best and strongest password is worth noting if the service provider isn't handling it properly. 
+The best and strongest password is worth nothing if the service provider isn't handling it properly. 
 It is clear that that a very big responsibility lies with the service provider which have to protect against both 
 online and offline attacks.  
 A summary of research (2014) about this can seen here: https://nakedsecurity.sophos.com/2014/10/24/do-we-really-need-strong-passwords/  
@@ -58,7 +58,7 @@ passwords and send out information to users - should the worst case scenario bec
 (or should I say when, as seen for even very large corporations).
 
 # Full authentication and Authorization framework
-in my professional work I very much like to use the ApacheDS LDAP for storing general user data and passwords. It provides
+In my professional work I very much like to use the ApacheDS LDAP for storing general user data and passwords. It provides
 password policies for quality, expiration and lockout, a good selection of password encryption options and more such 
 as Kerberos server and SASL integrations. I combine it with Apache Fortress to get a complete ANSI standard compliant 
 role based access control (RBAC) system for managing permissions in the application. Fortress also comes with a JavaEE REALM
